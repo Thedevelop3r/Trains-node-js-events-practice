@@ -37,14 +37,14 @@ class Train extends EventEmitter {
         });
 
 
-        this.on('addFuel', function () {
+        this.on('addFuel', async function () {
             console.log('Fueling train');
             const fuelCapacity = 150000; // 15000 liters
-            let fueling = 97; // 1000 liters per cycle
+            let fueling = 970; // 1000 liters per cycle
             setImmediate(async () => {
                 while (this.fuel <= fuelCapacity) {
-                    await waitFor(9);
-                    const genratedFuel = Number(((Math.random() * fueling) + 25).toFixed(2));
+                    await waitFor(5);
+                    const genratedFuel = Number(((Math.random() * fueling) + 359).toFixed(2));
                     const progressPercentage = (this.fuel / fuelCapacity) * 100;
                     const remaining = (fuelCapacity - this.fuel.toFixed(2));
                     if (this.fuel + genratedFuel > fuelCapacity) {
@@ -211,7 +211,10 @@ class Train extends EventEmitter {
     }
 }
 
-const trains = [1, 2, 3, 4, 5];
+
+const trains = new Array(4).fill(0);
+
+
 trains.forEach((train, index) => {
     trains[index] = new Train('Train ' + index);
 });
@@ -290,7 +293,7 @@ http.createServer(async (req, res) => {
     }
     // get stop
     else if (req.url === '/getStops') {
-       trains.map(train => train.getStops());
+        trains.map(train => train.getStops());
         res.end('Stops');
     } else if (req.url === "/train") {
         // json response
