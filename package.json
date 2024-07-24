@@ -1,0 +1,12 @@
+{
+  "name": "trains",
+  "version": "1.0.0",
+  "main": "train.js",
+  "scripts": {
+    "dev": "node --watch train.js",
+    "start": "node train.js"
+  },
+  "author": "bilal",
+  "license": "ISC",
+  "description": ""
+}
